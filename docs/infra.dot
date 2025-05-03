@@ -1,0 +1,37 @@
+digraph INFRA {
+  node [ color = "black", fillcolor = "#E6E6E6", height =1, style = "filled,bold,rounded", fontname = "Arial" ];
+  "mlr-dev-fe-dpl" [ label = "mlr-dev-fe-dpl
+(apps/v1.Deployment)", shape =rectangle, fillcolor = "#B7E0FF" ];
+  "mlr-dev-be-dpl-nod" [ label = "mlr-dev-be-dpl-nod
+(apps/v1.Deployment)", shape =rectangle, fillcolor = "#B7E0FF" ];
+  "mlr-dev-be-dpl-fap" [ label = "mlr-dev-be-dpl-fap
+(apps/v1.Deployment)", shape =rectangle, fillcolor = "#B7E0FF" ];
+  "mlr-dev-fe-svc" [ label = "mlr-dev-fe-svc
+(v1.Service)" ];
+  "mlr-dev-be-svc-nod" [ label = "mlr-dev-be-svc-nod
+(v1.Service)" ];
+  "mlr-dev-be-svc-fap" [ label = "mlr-dev-be-svc-fap
+(v1.Service)" ];
+  "mlr-dev-db-svc" [ label = "mlr-dev-db-svc
+(v1.Service)" ];
+  "mlr-dev-db-svc-fst" [ label = "mlr-dev-db-svc-fst
+(v1.Service)" ];
+  "mlr-dev-fe-ing" [ label = "mlr-dev-fe-ing
+(networking.k8s.io/v1.Ingress)" ];
+  "mlr-dev-be-ing" [ label = "mlr-dev-be-ing
+(networking.k8s.io/v1.Ingress)" ];
+  "mlr-dev-db-sts" [ label = "mlr-dev-db-sts
+(apps/v1.StatefulSet)", shape =rectangle, fillcolor = "#B7E0FF" ];
+  "mlr-dev-db-pvc" [ label = "mlr-dev-db-pvc
+(v1.PersistentVolumeClaim)", shape =cylinder, fillcolor = "#FFF5CD" ];
+  "mlr-dev-fe-dpl" -> "mlr-dev-be-svc-nod";
+  "mlr-dev-be-dpl-nod" -> "mlr-dev-db-svc";
+  "mlr-dev-fe-svc" -> "mlr-dev-fe-dpl";
+  "mlr-dev-be-svc-nod" -> "mlr-dev-be-dpl-nod";
+  "mlr-dev-be-svc-fap" -> "mlr-dev-be-dpl-fap";
+  "mlr-dev-db-svc" -> "mlr-dev-db-sts";
+  "mlr-dev-db-svc-fst" -> "mlr-dev-db-sts";
+  "mlr-dev-fe-ing" -> "mlr-dev-fe-svc";
+  "mlr-dev-be-ing" -> "mlr-dev-be-svc-nod";
+  "mlr-dev-db-sts" -> "mlr-dev-db-pvc";
+}
